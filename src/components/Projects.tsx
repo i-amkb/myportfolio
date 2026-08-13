@@ -32,7 +32,7 @@ const projects = [
     name: 'LibraNet',
     desc: 'An Online library System web app.',
     stack: ['CSS', 'HTML'],
-    link: 'Main Libranet/libranet-v3.html',
+    link: 'libranet-v3.html',
   },
   {
     num: '04',

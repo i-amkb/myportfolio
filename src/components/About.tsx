@@ -4,7 +4,7 @@ const info = [
   { label: 'Location', val: 'Nigeria 🇳🇬' },
   { label: 'Studying', val: 'Computer Sci / Cybersec, Year 2' },
   { label: 'Current focus', val: 'Cybersecurity fundamentals, Pentesting + Freelance video editing' },
-  { label: 'Interests', val: 'Anime · Game · Fitness · Editing' },
+  { label: 'Interests', val: 'Anime · Gaming · Fitness · Editing' },
   { label: 'Availability', val: 'Open to freelance & collabs', highlight: true },
 ]
 
