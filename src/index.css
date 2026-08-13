@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'Share Tech Mono', monospace;
+  --font-sans: 'Syne', sans-serif;
+
+  --color-bg: #030a06;
+  --color-surface: #080f0a;
+  --color-green: #00ff6a;
+  --color-green-dim: #00ff6a33;
+  --color-green-mid: #00ff6a88;
+  --color-text: #c8e6c9;
+  --color-muted: #4a6650;
+  --color-border: #0d2a14;
+  --color-cyan: #00e5ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  cursor: none;
+  margin: 0;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--color-green-dim); }
+  50% { opacity: 0.6; box-shadow: 0 0 0 6px transparent; }
+}
+
+.blink::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+  color: var(--color-green);
+}
+
+.scanlines::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.08) 2px,
+    rgba(0,0,0,0.08) 4px
+  );
+  pointer-events: none;
+  z-index: 9000;
+}
