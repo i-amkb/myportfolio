@@ -16,7 +16,7 @@ const projects = [
     status: '(in progress...)',
     desc: 'Web app powered by AI. An AI-driven workout and physique planning web app with features worth money.',
     stack: ['TS', 'React', 'API'],
-    link: 'builtdiff.html',
+    link: 'https://built-diff-xi.vercel.app/',
   },
   {
     num: '02',
