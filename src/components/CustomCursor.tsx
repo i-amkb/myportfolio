@@ -1,10 +1,21 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 export default function CustomCursor() {
   const dotRef = useRef<HTMLDivElement>(null)
   const ringRef = useRef<HTMLDivElement>(null)
+  const [hasMouse, setHasMouse] = useState(false)
 
   useEffect(() => {
+    const mq = window.matchMedia('(pointer: fine)')
+    setHasMouse(mq.matches)
+    const onChange = () => setHasMouse(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
+
+  useEffect(() => {
+    if (!hasMouse) return
+
     let mx = 0, my = 0, rx = 0, ry = 0
     const onMove = (e: MouseEvent) => {
       mx = e.clientX
@@ -53,7 +64,9 @@ export default function CustomCursor() {
         el.removeEventListener('mouseleave', shrink)
       })
     }
-  }, [])
+  }, [hasMouse])
+
+  if (!hasMouse) return null
 
   return (
     <>

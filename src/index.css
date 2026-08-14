@@ -28,8 +28,13 @@ body {
   color: var(--color-text);
   font-family: var(--font-mono);
   overflow-x: hidden;
-  cursor: none;
   margin: 0;
+}
+
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
 }
 
 @keyframes blink {
