@@ -67,7 +67,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto relative z-10">
+      <div className="grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-start w-full max-w-6xl mx-auto relative z-10">
         <div className="min-w-0">
           <div className="flex items-center gap-3 text-xs tracking-[0.2em] text-green uppercase mb-6">
             <span className="w-7 h-px bg-green" />
@@ -119,7 +119,7 @@ export default function Hero() {
         {/* Only shows once there's real horizontal room for it (lg+),
             same breakpoint the grid switches to two columns at — so it
             can never squeeze into the text column and collide again. */}
-        <div className="h-64 lg:h-80 hidden lg:block mt-12">
+        <div className="h-64 lg:h-80 hidden lg:block mt-28 lg:mt-36">
           <Suspense fallback={null}>
             <FloatingObject />
           </Suspense>
