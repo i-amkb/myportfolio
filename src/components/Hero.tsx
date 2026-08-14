@@ -119,7 +119,7 @@ export default function Hero() {
         {/* Only shows once there's real horizontal room for it (lg+),
             same breakpoint the grid switches to two columns at — so it
             can never squeeze into the text column and collide again. */}
-        <div className="h-64 lg:h-80 hidden lg:block mt-28 lg:mt-36">
+        <div className="h-48 sm:h-56 lg:h-80 mx-auto max-w-xs lg:max-w-none lg:mx-0 mt-4 lg:mt-36">
           <Suspense fallback={null}>
             <FloatingObject />
           </Suspense>
