@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, lazy, Suspense } from 'react'
+import { useEffect, useState, lazy, Suspense } from 'react'
 
 // Same deal as MatrixRain — Three.js chunk loads separately,
 // so this doesn't block the hero text/buttons from showing up.
@@ -45,36 +45,41 @@ function useTyping() {
   return text
 }
 
+const stats = [
+  { value: '1+', label: 'Years Coding' },
+  { value: '∞', label: 'Still Learning' },
+]
+
 export default function Hero() {
   const typing = useTyping()
-  const ref = useRef<HTMLDivElement>(null)
 
   return (
-    <section
-      id="hero"
-      ref={ref}
-      className="min-h-screen flex items-center px-6 md:px-12 pt-32 pb-16 relative overflow-hidden"
-    >
-      <div
-        className="absolute inset-0 opacity-60 pointer-events-none"
-        style={{
-          backgroundImage:
-            'linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)',
-          backgroundSize: '60px 60px',
-          maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
-        }}
-      />
-      <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 items-center w-full max-w-6xl mx-auto relative z-10">
-        <div>
+    <section id="hero" className="min-h-screen flex items-center px-6 md:px-12 pt-28 md:pt-32 pb-16 relative">
+      {/* Decorative grid background — lives in its own clipped layer so it
+          never affects sizing/overflow of the real content above it. */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div
+          className="absolute inset-0 opacity-60"
+          style={{
+            backgroundImage:
+              'linear-gradient(var(--color-border) 1px, transparent 1px), linear-gradient(90deg, var(--color-border) 1px, transparent 1px)',
+            backgroundSize: '60px 60px',
+            maskImage: 'radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent)',
+          }}
+        />
+      </div>
+
+      <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto relative z-10">
+        <div className="min-w-0">
           <div className="flex items-center gap-3 text-xs tracking-[0.2em] text-green uppercase mb-6">
             <span className="w-7 h-px bg-green" />
             Portfolio v2
           </div>
-          <h1 className="font-sans font-extrabold leading-none mb-2 tracking-tight">
-            <span className="block text-[clamp(3.2rem,9vw,6rem)] text-cyan drop-shadow-[0_0_30px_rgba(0,229,255,0.25)]">
+          <h1 className="font-sans font-extrabold leading-[1.05] mb-2 tracking-tight">
+            <span className="block text-[clamp(2.6rem,11vw,6rem)] sm:text-[clamp(3rem,8vw,6rem)] text-cyan drop-shadow-[0_0_30px_rgba(0,229,255,0.25)] pb-1">
               ADEWALE
             </span>
-            <span className="block text-[clamp(1.4rem,3.5vw,2.2rem)] text-white/75 tracking-[0.08em] font-bold mt-1">
+            <span className="block text-[clamp(1.15rem,4.5vw,2.2rem)] sm:text-[clamp(1.3rem,3vw,2.2rem)] text-white/75 tracking-[0.08em] font-bold mt-1">
               KHALID BOLUWATIFE
             </span>
           </h1>
@@ -82,10 +87,11 @@ export default function Hero() {
             <span>&gt;</span>
             <span className="blink">{typing}</span>
           </div>
-          <p className="max-w-md text-muted text-sm leading-relaxed mb-10">
+          <p className="max-w-md text-muted text-sm leading-relaxed mb-8">
             I write codes, play games, watch anime and edit for fun.
           </p>
-          <div className="flex gap-4 flex-wrap">
+
+          <div className="flex gap-4 flex-wrap mb-10">
             <a
               href="#projects"
               className="interactive inline-flex items-center gap-2 px-7 py-3 text-xs tracking-[0.1em] uppercase border border-green bg-green text-bg hover:bg-transparent hover:text-green hover:shadow-[0_0_20px_var(--color-green-dim),inset_0_0_20px_var(--color-green-dim)] transition-all"
@@ -99,21 +105,29 @@ export default function Hero() {
               Get in Touch
             </a>
           </div>
+
+          {/* Stats — now inline in the normal flow instead of absolutely
+              floating on the right, so they can never overlap the 3D
+              object's column, and they show on every screen size. */}
+          <div className="flex gap-8">
+            {stats.map((s) => (
+              <div key={s.label} className="border-l-2 border-green-dim pl-4">
+                <div className="font-sans text-2xl md:text-3xl font-extrabold text-green leading-none">
+                  {s.value}
+                </div>
+                <div className="text-[10px] text-muted uppercase tracking-widest mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="h-64 md:h-80 hidden md:block">
+
+        {/* 3D object now visible at every breakpoint, just smaller on
+            small screens, and stacks naturally below the text on mobile
+            since the grid collapses to one column there. */}
+        <div className="h-52 sm:h-64 md:h-80">
           <Suspense fallback={null}>
             <FloatingObject />
           </Suspense>
-        </div>
-      </div>
-      <div className="absolute right-6 md:right-16 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-8 z-10">
-        <div className="text-right border-r-2 border-green-dim pr-5">
-          <div className="font-sans text-3xl font-extrabold text-green leading-none">1+</div>
-          <div className="text-[10px] text-muted uppercase tracking-widest">Years Coding</div>
-        </div>
-        <div className="text-right border-r-2 border-green-dim pr-5">
-          <div className="font-sans text-3xl font-extrabold text-green leading-none">∞</div>
-          <div className="text-[10px] text-muted uppercase tracking-widest">Still Learning</div>
         </div>
       </div>
     </section>
