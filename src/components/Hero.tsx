@@ -55,8 +55,6 @@ export default function Hero() {
 
   return (
     <section id="hero" className="min-h-screen flex items-center px-6 md:px-12 pt-28 md:pt-32 pb-16 relative">
-      {/* Decorative grid background — lives in its own clipped layer so it
-          never affects sizing/overflow of the real content above it. */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
           className="absolute inset-0 opacity-60"
@@ -69,7 +67,7 @@ export default function Hero() {
         />
       </div>
 
-      <div className="grid md:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto relative z-10">
+      <div className="grid lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-12 items-center w-full max-w-6xl mx-auto relative z-10">
         <div className="min-w-0">
           <div className="flex items-center gap-3 text-xs tracking-[0.2em] text-green uppercase mb-6">
             <span className="w-7 h-px bg-green" />
@@ -106,9 +104,6 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Stats — now inline in the normal flow instead of absolutely
-              floating on the right, so they can never overlap the 3D
-              object's column, and they show on every screen size. */}
           <div className="flex gap-8">
             {stats.map((s) => (
               <div key={s.label} className="border-l-2 border-green-dim pl-4">
@@ -121,10 +116,10 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* 3D object now visible at every breakpoint, just smaller on
-            small screens, and stacks naturally below the text on mobile
-            since the grid collapses to one column there. */}
-        <div className="h-52 sm:h-64 md:h-80">
+        {/* Only shows once there's real horizontal room for it (lg+),
+            same breakpoint the grid switches to two columns at — so it
+            can never squeeze into the text column and collide again. */}
+        <div className="h-64 lg:h-80 hidden lg:block">
           <Suspense fallback={null}>
             <FloatingObject />
           </Suspense>
